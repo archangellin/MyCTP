@@ -1,0 +1,70 @@
+@page
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CTP 6.6.9 客户端</title>
+    <style>
+        body {font-family: Arial, sans-serif; margin: 20px;}
+        .row {display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 12px;}
+        input {padding: 4px 6px;}
+        .card {border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px;}
+        table {width: 100%; border-collapse: collapse;}
+        th, td {border: 1px solid #ddd; padding: 6px 8px; font-size: 13px;}
+        th {background: #f5f5f5;}
+        .grid {display:grid; grid-template-columns: 1fr 1fr; gap: 12px;}
+        ul {max-height: 220px; overflow: auto; margin: 0; padding-left: 18px;}
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>多账户登录</h2>
+    <div class="row">
+        <input id="brokerId" placeholder="BrokerId" value="9999"/>
+        <input id="userId" placeholder="UserId" value="demo1"/>
+        <input id="password" placeholder="Password" value="123456"/>
+        <input id="investorId" placeholder="InvestorId" value="demo1"/>
+        <input id="symbols" placeholder="订阅合约,逗号分隔" value="rb2410,cu2410"/>
+        <button id="loginBtn">登录并订阅</button>
+    </div>
+    <div class="row">
+        当前账户：
+        <select id="accountSelector"></select>
+    </div>
+</div>
+
+<div class="card">
+    <h3>资金栏</h3>
+    <div>可用资金：<strong id="availableFunds">0</strong></div>
+    <div>动态权益：<strong id="balance">0</strong></div>
+</div>
+
+<div class="card">
+    <h3>持仓表格</h3>
+    <table>
+        <thead><tr><th>合约</th><th>多头</th><th>空头</th><th>净仓</th><th>均价</th></tr></thead>
+        <tbody id="positionsBody"></tbody>
+    </table>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h3>委托信息（实时）</h3>
+        <ul id="orders"></ul>
+    </div>
+    <div class="card">
+        <h3>成交信息（实时）</h3>
+        <ul id="trades"></ul>
+    </div>
+</div>
+
+<div class="card">
+    <h3>行情信息（实时）</h3>
+    <ul id="ticks"></ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script src="~/js/app.js"></script>
+</body>
+</html>
